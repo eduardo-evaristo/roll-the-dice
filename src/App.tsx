@@ -5,10 +5,23 @@ type AvailableDice = 6 | 10 | 20;
 export default function App() {
   const availableDice: AvailableDice[] = [6, 10, 20];
   const [selectedDice, setSelectedDice] = useState<AvailableDice>(6);
+  const [result, setResult] = useState<number>();
 
   // Seta novo número no dado, é do tipo AvailableDice
   function handleChangeDice(diceValue: AvailableDice) {
     setSelectedDice(diceValue);
+  }
+
+  // Função para fazer a chamada para o backend e setar o resultado como resultado
+  //TODO: Implementar histórico via localStorage
+  async function handleRollDice() {
+    const res = await fetch(`http://localhost:8000/rolagem/${selectedDice}`, {
+      method: "POST",
+    });
+    const data = await res.json();
+    //console.log(data);
+    const result = data.message;
+    setResult(result);
   }
 
   return (
@@ -41,8 +54,13 @@ export default function App() {
           </div>
 
           <div className="flex flex-col justify-around items-center gap-3">
-            <h1 className="text-8xl lg:text-8xl font-bold text-blue-50">7</h1>
-            <button className="bg-slate-200 p-4 rounded text-sm font-bold text-blue-950 hover:bg-slate-400 focus:ring-2 focus:ring-offset-2 focus:ring-offset-amber-200 focus:ring-blue-950 transition-colors">
+            <h1 className="text-8xl lg:text-8xl font-bold text-blue-50">
+              {result}
+            </h1>
+            <button
+              className="bg-slate-200 p-4 rounded text-sm font-bold text-blue-950 hover:bg-slate-400 focus:ring-2 focus:ring-offset-2 focus:ring-offset-amber-200 focus:ring-blue-950 transition-colors"
+              onClick={handleRollDice}
+            >
               Rolar dado!
             </button>
           </div>
