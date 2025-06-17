@@ -36,8 +36,8 @@ export default function App() {
   }
 
   return (
-    <div className="min-h-screen bg-amber-300 flex justify-center items-center">
-      <div className="bg-blue-950 p-10 rounded w-[90%] lg:w-[50%]">
+    <div className="min-h-screen bg-blue-900 flex justify-center items-center">
+      <div className="bg-blue-950 p-10 md:rounded-xl w-[100%] md:w-[60%]">
         <div className="mb-4 flex flex-col items-center gap-3">
           <h1 className="text-slate-50 font-extrabold text-3xl">
             Selecione um dado!
@@ -64,12 +64,12 @@ export default function App() {
             />
           </div>
 
-          <div className="flex flex-col justify-around items-center gap-3">
+          <div className="flex flex-col justify-around items-center gap-3 bg-slate-900 rounded p-3 lg:p-6">
             <h1 className="text-8xl lg:text-8xl font-bold text-blue-50">
               {result}
             </h1>
             <button
-              className="bg-slate-200 p-4 rounded text-sm font-bold text-blue-950 hover:bg-slate-400 focus:ring-2 focus:ring-offset-2 focus:ring-offset-amber-200 focus:ring-blue-950 transition-colors"
+              className="bg-slate-200 py-4 px-12 lg:px-4 lg:py-4 rounded text-sm font-bold text-blue-950 hover:bg-slate-400 focus:ring-2 focus:ring-offset-2 focus:ring-offset-slate-900 focus:ring-amber-200 transition-colors"
               onClick={handleRollDice}
             >
               Rolar dado!
@@ -80,14 +80,15 @@ export default function App() {
             <div className="bg-slate-50 min-h-36 max-h-36 overflow-scroll">
               <ul>
                 {history.map((val) => (
-                  <li>
-                    {val.lados} - {val.message}
+                  <li className="text-lg">
+                    <span className="  font-extrabold">{val.lados}</span> -{" "}
+                    {val.message}
                   </li>
                 ))}
               </ul>
             </div>
             <button
-              className="bg-blue-950 text-slate-50 font-bold"
+              className="bg-blue-950 text-slate-50 font-bold focus"
               onClick={deleteHistory}
             >
               Limpar
