@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { RolledDiceResponse } from "../App";
+import type { RolledDiceResponse } from "../types";
 
 export default function useHistory() {
   //Aqui obtemos ou um array vazio quando não tivermos nada ou o array com as entrdas
