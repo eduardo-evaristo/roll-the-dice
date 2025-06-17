@@ -28,7 +28,7 @@ export default function App() {
             ))}
           </ul>
         </div>
-        <div className="flex gap-3 p-3">
+        <div className="flex gap-6 p-3">
           <div className="bg-slate-900 rounded-full p-2">
             <img
               src={`${selectedDice}.png`}
@@ -43,7 +43,23 @@ export default function App() {
               Rolar dado!
             </button>
           </div>
-          {/* <div className="">Histórico</div> */}
+          <div className="bg-slate-100 p-2 w-40 rounded flex flex-col justify-between">
+            <h1 className="text-lg font-bold text-center">Histórico</h1>
+            <div className="bg-slate-50 min-h-36 max-h-36 overflow-scroll">
+              <ul>
+                <li>Hello</li>
+                <li>Hello</li>
+                <li>Hello</li>
+                <li>Hello</li>
+                <li>Hello</li>
+                <li>Hello</li>
+                <li>Hello</li>
+              </ul>
+            </div>
+            <button className="bg-blue-950 text-slate-50 font-bold">
+              Limpar
+            </button>
+          </div>
         </div>
       </div>
     </div>
