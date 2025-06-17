@@ -4,7 +4,7 @@ import History from "./components/History";
 import Result from "./components/Result";
 import DiceImage from "./components/DiceImage";
 import List from "./components/ButtonList";
-import type { AvailableDice, RolledDiceResponse } from "./types";
+import type { AvailableDice, RolledDiceResponse } from "@shared/types";
 
 export const availableDice: AvailableDice[] = [6, 10, 20];
 
