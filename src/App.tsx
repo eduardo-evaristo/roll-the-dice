@@ -1,11 +1,18 @@
 import { useState } from "react";
+import useHistory from "./hooks/useHistory";
 
 type AvailableDice = 6 | 10 | 20;
+
+export type RolledDiceResponse = {
+  lados: string;
+  message: number;
+};
 
 export default function App() {
   const availableDice: AvailableDice[] = [6, 10, 20];
   const [selectedDice, setSelectedDice] = useState<AvailableDice>(6);
   const [result, setResult] = useState<number>();
+  const [history, setEntry, deleteHistory] = useHistory();
 
   // Seta novo número no dado, é do tipo AvailableDice
   function handleChangeDice(diceValue: AvailableDice) {
@@ -18,10 +25,14 @@ export default function App() {
     const res = await fetch(`http://localhost:8000/rolagem/${selectedDice}`, {
       method: "POST",
     });
-    const data = await res.json();
+    const data: RolledDiceResponse = await res.json();
     //console.log(data);
+    // Esse é resultado da rolagem
     const result = data.message;
+    // Setamos o resultado
     setResult(result);
+    // E colocamos a entrada no localStorage
+    setEntry(data);
   }
 
   return (
@@ -44,7 +55,7 @@ export default function App() {
             ))}
           </ul>
         </div>
-        <div className="flex flex-col lg:flex-row gap-8 lg:gap-6 p-3 items-center">
+        <div className="flex flex-col lg:flex-row gap-8 lg:gap-6 p-3 items-center justify-between">
           <div className="bg-slate-900 rounded-full p-2">
             <img
               src={`${selectedDice}.png`}
@@ -68,16 +79,17 @@ export default function App() {
             <h1 className="text-lg font-bold text-center">Histórico</h1>
             <div className="bg-slate-50 min-h-36 max-h-36 overflow-scroll">
               <ul>
-                <li>Hello</li>
-                <li>Hello</li>
-                <li>Hello</li>
-                <li>Hello</li>
-                <li>Hello</li>
-                <li>Hello</li>
-                <li>Hello</li>
+                {history.map((val) => (
+                  <li>
+                    {val.lados} - {val.message}
+                  </li>
+                ))}
               </ul>
             </div>
-            <button className="bg-blue-950 text-slate-50 font-bold">
+            <button
+              className="bg-blue-950 text-slate-50 font-bold"
+              onClick={deleteHistory}
+            >
               Limpar
             </button>
           </div>
