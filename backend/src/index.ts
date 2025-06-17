@@ -1,8 +1,8 @@
 import express, { Request, Response } from "express";
 import cors from "cors";
+import type { AvailableDice, RolledDiceResponse } from "@shared/types";
 
 // Tipos de dados disponíveis (mantendo padrão entre frontend e backend)
-export type AvailableDice = 6 | 10 | 20;
 const availableDice: AvailableDice[] = [6, 10, 20];
 
 // Definindo valor do port a ser usado
@@ -32,7 +32,10 @@ app.post(
     const valorDaRolagem: number = Math.trunc(Math.random() * lados) + 1;
 
     // Enviamos a resposta para o usuário
-    res.status(200).json({ lados: `D${lados}`, message: valorDaRolagem });
+    res.status(200).json({
+      lados: `D${lados}`,
+      message: valorDaRolagem,
+    } satisfies RolledDiceResponse);
   }
 );
 
