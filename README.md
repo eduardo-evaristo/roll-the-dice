@@ -21,7 +21,6 @@ O site consiste em uma única página onde o usuário poderá:
 
   - React
   - Vite
-  - React Router
   - Tailwind CSS
 
 - **Back-end**:
